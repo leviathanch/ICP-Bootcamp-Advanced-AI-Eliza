@@ -74,6 +74,28 @@ IC_ETH_WALLET_CANISTER=bkyz2-...-cai
 
 The `INTERNET_COMPUTER_PRIVATE_KEY` is the private key of the Internet Computer identity that the agent will use to interact with the wallet canister. It consists of any 32-byte hex string.
 
+You can use openssl for generating a private key by running the following commands
+
+```bash
+openssl genpkey -algorithm ed25519 -out private.pem
+openssl ec -in private.pem -text -noout
+```
+
+This will yield something looking like this:
+
+```
+read EC key
+ED25519 Private-Key:
+priv:
+   aa:bb:..
+   cc:..
+   dd:..
+pub:
+...
+```
+
+Copy all lines under priv and before pub into a text editor, remove all the colons and new lines and set the resulting string in your .env file as INTERNET_COMPUTER_PRIVATE_KEY
+
 The `IC_ETH_WALLET_CANISTER` is the ICP canister ID of the wallet canister. When deploying the wallet canister, you will receive this ID.
 
 ## Run agent
